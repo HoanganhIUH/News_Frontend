@@ -1,0 +1,45 @@
+<div class="main-layout">
+  <!-- Cột trái: Danh sách bài viết -->
+  <div class="main-content">
+    <div class="news-list-vertical">
+      <div class="news-card-horizontal" *ngFor="let article of filteredArticles() | slice:0:displayCount">
+        <div class="news-image-wrapper">
+          <img *ngIf="article.urlImage" [src]="article.urlImage" alt="Ảnh bài viết" class="news-image-horizontal" />
+        </div>
+        <div class="news-content">
+          <div class="news-category" *ngIf="selectedCategoryName">{{ article.categoryName }}</div>
+          <h3 class="news-title">
+            <a [href]="article.url" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
+          </h3>
+          <div class="news-meta">
+            <span>{{ article.publishedAt | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <p class="news-description">{{ article.description }}</p>
+        </div>
+      </div>
+      <div class="loadmore-container" *ngIf="canLoadMore">
+        <div *ngIf="isLoading" class="loading-indicator">
+          <span class="spinner"></span> Đang tải...
+        </div>
+        <button *ngIf="!isLoading" class="loadmore-btn" (click)="loadMore()">Load more</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cột phải: Sidebar bài viết mới -->
+  <div class="sidebar">
+    <div class="sidebar-title">BÀI VIẾT MỚI</div>
+    <div class="sidebar-article-large" *ngFor="let article of articles | slice:0:3">
+      <a [href]="article.url" target="_blank" rel="noopener noreferrer">
+        <img *ngIf="article.urlImage" [src]="article.urlImage" alt="Ảnh bài viết" class="sidebar-article-large-img" />
+        <div class="sidebar-article-large-title">{{ article.title }}</div>
+      </a>
+      <div class="sidebar-article-large-meta">
+        <span class="by-pewnews">By PewNews</span>
+        <span class="tick-verified">&#10003;</span>
+        <span class="meta-separator"></span>
+        <span class="sidebar-date">{{ article.publishedAt | date:'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

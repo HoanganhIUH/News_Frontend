@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+.pewnews-header {
+    width: 100%;
+    background: #d60000;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .pewnews-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 24px;
+  }
+  
+  .pewnews-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .pewnews-nav {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .pewnews-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .pewnews-nav a:hover {
+    color: #ffe600;
+    border-bottom: 2px solid #ffe600;
+  }
+  
+  .pewnews-signup {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 16px;
+  }
+  
+  .pewnews-signup:hover {
+    background: #1256a2;
+  } 
