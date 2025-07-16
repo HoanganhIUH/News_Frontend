@@ -9,7 +9,7 @@
         <div class="news-content">
           <div class="news-category" *ngIf="selectedCategoryName">{{ article.categoryName }}</div>
           <h3 class="news-title">
-            <a [href]="article.url" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
+            <a href="#" (click)="onArticleClick(article.id); $event.preventDefault()">{{ article.title }}</a>
           </h3>
           <div class="news-meta">
             <span>{{ article.publishedAt | date:'dd/MM/yyyy' }}</span>
@@ -41,5 +41,24 @@
         <span class="sidebar-date">{{ article.publishedAt | date:'dd/MM/yyyy' }}</span>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal chi tiết bài báo -->
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <button class="modal-close" (click)="closeModal()">&times;</button>
+    <ng-container *ngIf="selectedArticle; else loadingModal">
+      <h2 class="modal-title">{{ selectedArticle.title }}</h2>
+      <div class="modal-meta">
+        <span>{{ selectedArticle.categoryName }}</span> |
+        <span>{{ selectedArticle.publishedAt | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <img *ngIf="selectedArticle.urlImage" [src]="selectedArticle.urlImage" alt="Ảnh bài viết" class="modal-image" />
+      <div class="modal-content-text">{{ selectedArticle.content }}</div>
+    </ng-container>
+    <ng-template #loadingModal>
+      <div class="modal-loading">Đang tải bài viết...</div>
+    </ng-template>
   </div>
 </div>

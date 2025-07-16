@@ -14,4 +14,8 @@ export class ArticleService {
   getArticles(page: number, size: number): Observable<Article[]> {
     return this.http.get<Article[]>(`${this.baseUrl}?page=${page}&size=${size}`);
   }
+
+  getArticleById(id: number): Observable<Article> {
+    return this.http.get<Article>(`${this.baseUrl}/${id}`);
+  }
 }

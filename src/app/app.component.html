@@ -198,14 +198,54 @@
 <main class="main">
   <app-article-list [selectedCategoryName]="selectedCategoryName"></app-article-list>
 </main>
+<footer class="pewnews-footer">
+  <div class="footer-content">
+    <!-- CỘNG ĐỒNG -->
+    <div class="footer-col">
+      <h3 class="footer-title">CỘNG ĐỒNG PEWNEWS</h3>
+      <p>Giấy phép hoạt động trang Mạng Xã Hội trên mạng số 02/2016/MXH, ngày 07-04-2016</p>
+      <p><strong>Điện thoại:</strong> (+84) 395 465 845</p>
+      <p><strong>Email:</strong> <a href="mailto:truonghoanganh059&#64;gmail.com">truonghoanganh059&#64;gmail.com</a></p>
+      <p><a href="#">Thoả thuận sử dụng dịch vụ</a></p>
+      <div style="margin-top:10px;color: rgb(242, 247, 247);">
+        <p><strong>Chịu trách nhiệm nội dung:</strong> Trương Hoàng Anh</p>
+        <p><strong>Địa chỉ:</strong> 458 Dương Quảng Hàm, Quận Gò Vấp, Hồ Chí Minh</p>
+        <p><strong>Điện thoại:</strong> (+84) 395 465 845</p>
+        <p><strong>Email:</strong> <a href="mailto:truonghoanganh059&#64;gmail.com">truonghoanganh059&#64;gmail.com</a></p>
+      </div>
+    </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <!-- MỚI NHẤT -->
+    <div class="footer-col">
+      <h3 class="footer-title">MỚI NHẤT</h3>
+      <div class="footer-article" *ngFor="let article of articles | slice:0:3">
+        <img *ngIf="article.urlImage" [src]="article.urlImage" alt="">
+        <div>
+          <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+          <p class="footer-date">{{ article.publishedAt | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- NỔI BẬT -->
+    <div class="footer-col">
+      <h3 class="footer-title">NỔI BẬT</h3>
+      <div class="footer-article" *ngFor="let article of articles | slice:0:3">
+        <img *ngIf="article.urlImage" [src]="article.urlImage" alt="">
+        <div>
+          <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+          <p class="footer-date">{{ article.publishedAt | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-social">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <div class="footer-copy">© 2025 PewNews. Designed by PewNews.</div>
+</footer>
 
 <router-outlet />

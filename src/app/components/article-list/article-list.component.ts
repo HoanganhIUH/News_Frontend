@@ -15,6 +15,11 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   displayCount = 10;
   isLoading = false;
   loadStep = 10;
+  autoLoadLimit = 30;
+
+  // Modal chi tiết bài báo
+  showModal = false;
+  selectedArticle?: Article;
 
   constructor(private articleService: ArticleService) {}
 
@@ -25,7 +30,10 @@ export class ArticleListComponent implements OnInit, OnDestroy {
         data.forEach(article => {
           article.description = article.content.slice(0, 120) + '...';
         });
-        this.articles = data;
+        // Sắp xếp theo publishedAt giảm dần (bài mới lên đầu)
+        this.articles = data.sort((a, b) => 
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        );
         console.log('DATA:', data);
       }
     });
@@ -42,7 +50,7 @@ export class ArticleListComponent implements OnInit, OnDestroy {
 
   onScroll() {
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
-      if (this.canLoadMore && !this.isLoading) {
+      if (this.canLoadMore && !this.isLoading && this.displayCount < this.autoLoadLimit) {
         this.loadMore(true);
       }
     }
@@ -52,13 +60,30 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     if (this.isLoading) return;
     this.isLoading = true;
     setTimeout(() => {
-      this.displayCount += this.loadStep;
+      if (auto && this.displayCount + this.loadStep > this.autoLoadLimit) {
+        this.displayCount = this.autoLoadLimit;
+      } else {
+        this.displayCount += this.loadStep;
+      }
       this.isLoading = false;
-    }, auto ? 1200 : 500); // auto scroll thì loading lâu hơn chút
+    }, auto ? 1200 : 500);
   }
 
   filteredArticles(): Article[] {
     if (!this.selectedCategoryName) return this.articles;
     return this.articles.filter(a => a.categoryName === this.selectedCategoryName);
+  }
+
+  // Hiển thị modal chi tiết bài báo
+  onArticleClick(id: number) {
+    this.articleService.getArticleById(id).subscribe(article => {
+      this.selectedArticle = article;
+      this.showModal = true;
+    });
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedArticle = undefined;
   }
 }

@@ -28,8 +28,13 @@ export class AppComponent implements OnInit {
   loadArticles() {
     if (this.loading) return;
     this.loading = true;
-    this.articleService.getArticles(this.page, this.size).subscribe((data) => {
-      this.articles = [...this.articles, ...data];
+    this.articleService.getArticles(0, 100).subscribe((data) => {
+      if (data && data.length > 0) {
+        data.forEach(article => {
+          article.description = article.content.slice(0, 120) + '...';
+        });
+        this.articles = data.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+      }
       this.page++;
       this.loading = false;
     });
