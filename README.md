@@ -1,2 +1,7 @@
-# NewWebsite_Frontend
-Giao diện người dùng được xây dựng bằng Angular kết hợp với TailwindCSS (hoặc Bootstrap), mang lại trải nghiệm hiện đại và thân thiện trên cả máy tính và thiết bị di động. Trang chủ hỗ trợ lazy loading, giúp tải thêm bài viết khi người dùng cuộn xuống cuối trang mà không cần reload lại trang. Dự án được tổ chức mã nguồn sạch sẽ, chia thành các component, service và module rõ ràng để dễ dàng mở rộng và bảo trì. Ứng dụng frontend này hoàn toàn tách biệt với backend, sử dụng RESTful API (được mô tả bằng Swagger) để lấy dữ liệu bài viết từ hệ thống backend. Hệ thống cũng có cơ chế xử lý lỗi khi gọi API, đảm bảo hiển thị thông báo rõ ràng khi có sự cố xảy ra.
+# NewsWebsite_FE
+NewsWebsite_FE là giao diện người dùng của một website tin tức hiện đại, được xây dựng bằng Angular kết hợp với TailwindCSS (hoặc Bootstrap). Ứng dụng mang lại trải nghiệm mượt mà, thân thiện trên cả máy tính và thiết bị di động, hỗ trợ lazy loading để tải thêm bài viết khi người dùng cuộn xuống cuối trang mà không cần reload lại trang.
+    Hiển thị danh sách bài viết: Lấy dữ liệu từ backend thông qua RESTful API.
+    Lazy Loading: Tải thêm bài viết khi cuộn trang, tối ưu hiệu năng và trải nghiệm người dùng.
+    Responsive Design: Giao diện thích ứng trên mọi thiết bị.
+    Xử lý lỗi API: Hiển thị thông báo rõ ràng khi có sự cố kết nối hoặc lỗi dữ liệu.
+    Kiến trúc rõ ràng: Tách biệt các thành phần (component), dịch vụ (service), và mô hình dữ liệu (model) giúp dễ dàng mở rộng, bảo trì.
