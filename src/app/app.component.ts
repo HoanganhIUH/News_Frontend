@@ -4,12 +4,13 @@ import { Article } from './models/article.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [CommonModule,RouterModule,ArticleListComponent],
+  imports: [CommonModule, RouterModule, ArticleListComponent, FormsModule],
   
 })
 export class AppComponent implements OnInit {
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   size = 5;
   loading = false;
   selectedCategoryName: string = '';
+  searchTerm: string = '';
 
   constructor(private articleService: ArticleService) {}
 
@@ -49,5 +51,9 @@ export class AppComponent implements OnInit {
 
   onCategoryChange(category: string) {
     this.selectedCategoryName = category;
+  }
+
+  onSearchTermChange(term: string) {
+    this.searchTerm = term;
   }
 }

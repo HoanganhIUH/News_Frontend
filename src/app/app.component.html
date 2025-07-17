@@ -176,6 +176,158 @@
     }
     
   }
+
+  .pewnews-header {
+    width: 100%;
+    background: #d60000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 64px;
+  }
+  .pewnews-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 3000px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    gap: 32px;
+  }
+  .pewnews-logo {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-right: 22px;
+    white-space: nowrap;
+  }
+  .pewnews-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex: 1;
+  }
+  .pewnews-nav a {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0 2px;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2.5px solid transparent;
+    line-height: 1.2;
+    position: relative;
+    white-space: nowrap;
+  }
+  .pewnews-nav a.active, .pewnews-nav a:hover {
+    color: #f9f909;
+  }
+  .pewnews-search-group {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    padding: 2px 16px 2px 10px;
+    margin-right: 5px;
+    margin-left: 18px;
+    height: 40px;
+    min-width: 220px;
+    max-width: 220px;
+    flex-shrink: 0;
+  }
+  .pewnews-search-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 7px;
+    color: #888;
+  }
+  .pewnews-search-input {
+    border: none;
+    outline: none;
+    font-size: 1.08rem;
+    background: transparent;
+    width: 100%;
+    padding: 4px 0;
+    font-family: inherit;
+    color: #3a3838;
+  }
+  .pewnews-search-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+  .pewnews-signup {
+    background: #1976d2;
+    color: #fff;
+    font-size: 1.18rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 36px 10px 36px;
+    margin-left: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .pewnews-signup:hover {
+    background: #1251a3;
+    transform: translateY(-2px) scale(1.03);
+  }
+  @media (max-width: 900px) {
+    .pewnews-header-content {
+      padding: 0 10px;
+      gap: 12px;
+    }
+    .pewnews-logo {
+      font-size: 1.5rem;
+      margin-right: 12px;
+    }
+    .pewnews-search-group {
+      min-width: 120px;
+      max-width: 180px;
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+    .pewnews-signup {
+      padding: 8px 18px;
+      font-size: 1rem;
+    }
+    .pewnews-nav {
+      gap: 10px;
+    }
+    .pewnews-nav a {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 650px) {
+    .pewnews-header-content {
+      flex-wrap: wrap;
+      height: auto;
+      gap: 6px;
+    }
+    .pewnews-logo {
+      margin-bottom: 4px;
+    }
+    .pewnews-nav {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pewnews-search-group {
+      min-width: 80px;
+      max-width: 120px;
+      height: 32px;
+      padding: 2px 6px 2px 6px;
+    }
+    .pewnews-signup {
+      padding: 6px 10px;
+      font-size: 0.95rem;
+    }
+  }
 </style>
 
 <header class="pewnews-header">
@@ -192,11 +344,17 @@
       <a href="#" [class.active]="selectedCategoryName === 'Giáo dục'" (click)="onCategoryChange('Giáo dục'); $event.preventDefault()">Giáo dục</a>
       <a href="#" [class.active]="selectedCategoryName === 'Video'" (click)="onCategoryChange('Video'); $event.preventDefault()">Video</a>
     </nav>
+    <div class="pewnews-search-group">
+      <span class="pewnews-search-icon">
+        <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7" stroke="#888" stroke-width="2"/><path d="M15.5 15.5L13 13" stroke="#888" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <input type="text" placeholder="Tìm kiếm bài viết..." [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" class="pewnews-search-input" />
+    </div>
     <button class="pewnews-signup">Đăng ký PewNews</button>
   </div>
 </header>
 <main class="main">
-  <app-article-list [selectedCategoryName]="selectedCategoryName"></app-article-list>
+  <app-article-list [selectedCategoryName]="selectedCategoryName" [searchTerm]="searchTerm"></app-article-list>
 </main>
 <footer class="pewnews-footer">
   <div class="footer-content">

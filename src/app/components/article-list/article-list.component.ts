@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ArticleListComponent implements OnInit, OnDestroy {
   @Input() selectedCategoryName: string = '';
+  @Input() searchTerm: string = '';
   articles: Article[] = [];
   displayCount = 10;
   isLoading = false;
@@ -70,8 +71,19 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   }
 
   filteredArticles(): Article[] {
-    if (!this.selectedCategoryName) return this.articles;
-    return this.articles.filter(a => a.categoryName === this.selectedCategoryName);
+    let filtered = this.articles;
+    if (this.selectedCategoryName) {
+      filtered = filtered.filter(a => a.categoryName === this.selectedCategoryName);
+    }
+    if (this.searchTerm && this.searchTerm.trim() !== '') {
+      const term = this.searchTerm.trim().toLowerCase();
+      filtered = filtered.filter(a =>
+        a.title.toLowerCase().includes(term) ||
+        a.content.toLowerCase().includes(term) ||
+        (a.description && a.description.toLowerCase().includes(term))
+      );
+    }
+    return filtered;
   }
 
   // Hiển thị modal chi tiết bài báo
